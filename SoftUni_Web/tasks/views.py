@@ -5,23 +5,23 @@ from django.shortcuts import render
 from SoftUni_Web.tasks.models import Task
 
 
-def home(request):
-    items = Task.objects.all()
-    item_strings = [f'<li>{t.title} - {t.text}</li>' for t in items]
-    items_string = ''.join(item_strings)
-    html = f"""
-    <h1>Vesso is playing with Django</h1>
-    <ul>
-    {items_string}
-    </ul>
-    <h1>Vesso is playing with Django again</h1>
-    <ol>
-    <li>one</li>
-    <li>two</li>
-    <li>three</li>
-    </ol>
-    """
-    return HttpResponse(html)
+# def home(request):
+#     items = Task.objects.all()
+#     item_strings = [f'<li>{t.title} - {t.text}</li>' for t in items]
+#     items_string = ''.join(item_strings)
+#     html = f"""
+#     <h1>Vesso is playing with Django</h1>
+#     <ul>
+#     {items_string}
+#     </ul>
+#     <h1>Vesso is playing with Django again</h1>
+#     <ol>
+#     <li>one</li>
+#     <li>two</li>
+#     <li>three</li>
+#     </ol>
+#     """
+#     return HttpResponse(html)
 
 
 def user(request):
@@ -41,4 +41,13 @@ def user(request):
     </ol>
     """
     return HttpResponse(html)
+
+
+def home(request):
+    context = {
+        'title': "It works from view!",
+        'tasks': Task.objects.all(),
+    }
+    return render(request, "home.html", context)
+
 
